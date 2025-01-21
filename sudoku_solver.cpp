@@ -37,7 +37,36 @@ void print_grid(char* grid) {
 	printf("-------------------\n");
 }
 
+bool contains_blanks(char* grid) {
+	for (int i = 0; i < 81; i++) {
+		if (grid[i] == 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+int solve(char* grid, int occupied_spaces) {
+	char possible_vals[9] = {'1','2','3','4','5','6','7','8','9'};
+	for (int i = 0; i < 81; i++) {
+		if (grid[i] == ' ') {	// Only pay attention to the empty squares.
+			int row = i / 9;
+			int column = i % 9;
+			printf("Empty space at (%d,%d)\n", column, row);
+		}
+	}
+	return occupied_spaces;
+}
+
 int main() {
 	char* grid = initialize_grid();
 	print_grid(grid);
+	int occupied_spaces = 58;
+	int steps = 0;	// Temp measure to prevent infinite loop
+	occupied_spaces = solve(grid, steps);
+	while (contains_blanks && steps < 80) {
+		print_grid(grid);
+		steps++;
+	}
+	delete[] grid;
 }
