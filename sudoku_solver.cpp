@@ -3,18 +3,18 @@
 #include <tuple>
 using namespace std;
 
-void print_grid(char* grid) {
-	for (int i = 0; i < 9; i++) {	// For every column
-		printf("-------------------");
-		printf("\n");
-		for (int j = 0; j < 9; j++) {	// Print every row
-			printf("|%c", grid[9 * i + j]);
-		}
-		printf("|");
-		printf("\n");
-	}
-	printf("-------------------\n\n\n");
-}
+//void print_grid(char* grid) {
+//	for (int i = 0; i < 9; i++) {	// For every column
+//		printf("-------------------");
+//		printf("\n");
+//		for (int j = 0; j < 9; j++) {	// Print every row
+//			printf("|%c", grid[9 * i + j]);
+//		}
+//		printf("|");
+//		printf("\n");
+//	}
+//	printf("-------------------\n\n\n");
+//}
 
 // The sudoku grid contains 9 3x3 squares. This function determines which of these squares contains
 // a given point. The 3x3 squares are numbered left to right, then top to bottom as follows:
@@ -124,8 +124,16 @@ int main() {
 	int steps = 0;	// Prevents infinite loop in event of error
 	while (occupied_spaces < 81 && steps < 80) {	// Exit if the solution has been found or if the program cannot find a solution.
 		occupied_spaces = solve(grid, occupied_spaces);
-		print_grid(grid);	// Each time a value is added, print the updated grid.
+		//print_grid(grid);	// Each time a value is added, print the updated grid.
 		steps++;
 	}
+	
+	if (occupied_spaces < 81) {
+		printf("Unable to find solution");
+	}
+	else {
+		cout << grid << endl;
+	}
+	
 	delete[] grid;
 }
