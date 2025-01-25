@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 import tkinter as tk
 
-cells = []
-master = tk.Tk()
+cells = []		# This list will hold tk.Entry objects representing grid squares.
+master = tk.Tk()	# Create GUI window.
 
 def save_cells():
-	cell_data = ""
+	cell_data = ""	# String to hold cell data (number or blank) for output purposes.
+	
+	# For every cell, verify its contents. If invalid content is found, exit the function. If all content is valid, print the data and destroy the window.
 	for cell in cells:
 		content = cell.get()
 		if not content in ["1", "2", "3", "4", "5", "6", "7", "8", "9", ""]:
@@ -19,9 +21,10 @@ def save_cells():
 				cell_data += " "
 			else:
 				cell_data += content
-	print(cell_data)
+	print(cell_data)	# Print the cell data so it can be used by another program.
 	master.destroy()
-			
+
+# Create the grid and save button for user input.			
 for row in range(9):
 	for col in range(9):
 		cell = tk.Entry(master, width=2, font=("Arial", 50), justify="center")
