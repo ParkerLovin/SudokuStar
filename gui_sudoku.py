@@ -4,7 +4,7 @@ import tkinter as tk
 cells = []
 master = tk.Tk()
 
-def save_cells():	# TEMP
+def save_cells():
 	cell_data = ""
 	for cell in cells:
 		content = cell.get()
@@ -19,7 +19,7 @@ def save_cells():	# TEMP
 				cell_data += " "
 			else:
 				cell_data += content
-	print(cell_data.strip())
+	print(cell_data)
 	master.destroy()
 			
 for row in range(9):

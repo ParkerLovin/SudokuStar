@@ -59,8 +59,9 @@ tuple<int, int> get_ninth(int row, int column) {
 }
 
 int solve(char* grid, int occupied_spaces) {
-	char possible_vals[9] = {'1','2','3','4','5','6','7','8','9'};
 	for (int i = 0; i < 81; i++) {
+		char possible_vals[9] = {'1','2','3','4','5','6','7','8','9'};
+		//printf("Testing space %d\n", i);
 		if (grid[i] == ' ') {	// Only pay attention to the empty squares.
 			// Calculate the row and column of the empty space.
 			int row = i / 9;
@@ -104,6 +105,7 @@ int solve(char* grid, int occupied_spaces) {
 				if (possible_vals[j] != 'x') { // If we find a value not equal to 'x' hold onto it, and update the number of possible values.
 					new_val = possible_vals[j];
 					number_of_possible_values++; 
+					//printf("Possible value: %c", new_val); // TEMP
 				}
 			}
 			
@@ -120,6 +122,7 @@ int solve(char* grid, int occupied_spaces) {
 int main() {
 	string puzzle_data;
 	getline(cin, puzzle_data);
+	//puzzle_data = "267 84     325    9 4      5   78962 764  1 5     137 7 58 249      52  42 1  753";
 	
 	char* grid = new char[81];
 	int occupied_spaces = 0;
@@ -129,13 +132,12 @@ int main() {
 			occupied_spaces++;
 		}
 	}
-
-	print_grid(grid);
+	//print_grid(grid);
 	int steps = 0;	// Temp measure to prevent infinite loop
-	//while (occupied_spaces < 81 && steps < 80) {
-	//	occupied_spaces = solve(grid, occupied_spaces);
-	//	print_grid(grid);
-	//	steps++;
-	//}
+	while (occupied_spaces < 81 && steps < 80) {
+		occupied_spaces = solve(grid, occupied_spaces);
+		print_grid(grid);
+		steps++;
+	}
 	delete[] grid;
 }
