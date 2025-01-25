@@ -5,7 +5,7 @@ cells = []
 master = tk.Tk()
 
 def save_cells():	# TEMP
-	array = []
+	cell_data = ""
 	for cell in cells:
 		content = cell.get()
 		if not content in ["1", "2", "3", "4", "5", "6", "7", "8", "9", ""]:
@@ -16,11 +16,11 @@ def save_cells():	# TEMP
 			return
 		else:
 			if content == "":
-				array.append(" ")
+				cell_data += " "
 			else:
-				array.append(content)
-	print(array)
-	
+				cell_data += content
+	print(cell_data.strip())
+	master.destroy()
 			
 for row in range(9):
 	for col in range(9):

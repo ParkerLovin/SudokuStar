@@ -143,14 +143,17 @@ int solve(char* grid, int occupied_spaces) {
 }
 
 int main() {
+	string puzzle_data;
+	getline(cin, puzzle_data);
+	cout << puzzle_data << endl;	// TEMP
 	char* grid = initialize_grid();
 	print_grid(grid);
 	int occupied_spaces = 58;
 	int steps = 0;	// Temp measure to prevent infinite loop
-	while (occupied_spaces < 81 && steps < 80) {
-		occupied_spaces = solve(grid, occupied_spaces);
-		print_grid(grid);
-		steps++;
-	}
+	//while (occupied_spaces < 81 && steps < 80) {
+	//	occupied_spaces = solve(grid, occupied_spaces);
+	//	print_grid(grid);
+	//	steps++;
+	//}
 	delete[] grid;
 }
