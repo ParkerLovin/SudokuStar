@@ -3,6 +3,7 @@
 #include <tuple>
 using namespace std;
 
+// This function was replaced by the file solution_gui.py. However, feel free to uncomment this function and use it for testing purposes.
 //void print_grid(char* grid) {
 //	for (int i = 0; i < 9; i++) {	// For every column
 //		printf("-------------------");
@@ -51,7 +52,7 @@ tuple<int, int> get_ninth(int row, int column) {
 
 // Solves the puzzle by examining each empty space and narrowing the possible contents down to one value.
 int solve(char* grid, int occupied_spaces) {
-	for (int i = 0; i < 81; i++) {	// Examine each empty space.
+	for (int i = 0; i < 81; i++) {	// Iterate through each space in the grid.
 		char possible_vals[9] = {'1','2','3','4','5','6','7','8','9'};
 		if (grid[i] == ' ') {	// Only pay attention to the empty squares.
 			// Calculate the row and column of the empty space.
@@ -64,11 +65,9 @@ int solve(char* grid, int occupied_spaces) {
 				char current_column_val = grid[column + 9 * j];
 				if (current_row_val != ' ') {
 					possible_vals[current_row_val - '0' - 1] = 'x';	// Remove current value from possible values list.
-					//possible_vals[stoi(current_row_val) - 1] = 'x';	// Remove current value from possible values list.
 				}
 				if (current_column_val != ' ') {
 					possible_vals[current_column_val - '0' - 1] = 'x'; // Remove current value from possible values list.
-					//vals[stoi(current_column_val) - 1] = 'x'; // Remove current value from possible values list.
 				}
 			}
 			// Rule out numbers which already exist in the current 3x3 grid.
@@ -99,7 +98,7 @@ int solve(char* grid, int occupied_spaces) {
 			// If there is only one possible new value, update the grid.
 			if (number_of_possible_values == 1) {
 				grid[i] = new_val;
-				return occupied_spaces + 1;	// This statement means exiting this function as soon as a value is added. This works well for demonstration purposes but could be changed to improve efficiency.
+				return occupied_spaces + 1;
 			}
 		}
 	}
@@ -107,11 +106,11 @@ int solve(char* grid, int occupied_spaces) {
 }
 
 int main() {
-	// gui_sudoku.py is used to convert the starting grid to a string. This file (sudoku_solver.cpp) reads this string as the starting point for solving the puzzle.
+	// input_gui.py is used to convert the starting grid to a string. This file (sudoku_solver.cpp) reads this string as the starting point for solving the puzzle.
 	string puzzle_data;
 	getline(cin, puzzle_data);
 	
-	// NOTE: This grid could probably be replaced with the original string. Perhaps I could remove this in a future update?
+	// Translate puzzle_data into an array representing the grid. Keep track of how many spaces are occupied.
 	char* grid = new char[81];
 	int occupied_spaces = 0;
 	for (int i = 0; i < 81; i++) {
@@ -129,10 +128,10 @@ int main() {
 	}
 	
 	if (occupied_spaces < 81) {
-		printf("Unable to find solution");
+		printf("Unable to find solution");	// Handle the event in which a solution is not found.
 	}
 	else {
-		cout << grid << endl;
+		cout << grid << endl;	// If a solution is found, output the solution for use by solution_gui.py.
 	}
 	
 	delete[] grid;

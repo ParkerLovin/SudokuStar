@@ -2,7 +2,7 @@
 import tkinter as tk
 
 cells = []		# This list will hold tk.Entry objects representing grid squares.
-root = tk.Tk()	# Create GUI window.
+root = tk.Tk()		# Create GUI window.
 
 def save_cells():
 	cell_data = ""	# String to hold cell data (number or blank) for output purposes.
@@ -21,7 +21,7 @@ def save_cells():
 				cell_data += " "
 			else:
 				cell_data += content
-	print(cell_data)	# Print the cell data so it can be used by another program.
+	print(cell_data)	# Print the cell data so it can be used by sudoku_solver.cpp.
 	root.destroy()
 
 # Create the grid and save button for user input.			

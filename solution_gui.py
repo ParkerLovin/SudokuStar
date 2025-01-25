@@ -2,9 +2,10 @@
 import tkinter as tk
 
 solution_string = input()	# Get the solution from sudoku_solver.cpp
-
 if solution_string == "Unable to find solution":
 	print(solution_string)
+elif len(solution_string) != 81:
+	print("An error occurred. Received data is not in the expected format.")
 else:
 	root = tk.Tk()	# Create GUI window.
 
