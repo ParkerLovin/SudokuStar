@@ -3,31 +3,6 @@
 #include <tuple>
 using namespace std;
 
-// Note: The initialized grid is bad.
-
-char* initialize_grid() {
-	char* grid = new char[81];
-	
-	// Define the Sudoku grid as a one-dimensional character array
-    	char temp[81] = {
-		'6', '8', ' ', '4', ' ', '3', ' ', '5', ' ',
-		'4', ' ', '2', ' ', '5', ' ', '3', '6', '8',
-		'5', '9', '3', '6', '7', '8', ' ', ' ', '4',
-		' ', '1', '7', '2', '8', '6', '9', '4', '5',
-		'8', ' ', '9', '5', ' ', '4', '2', ' ', '7',
-		'2', '5', '4', '3', '9', '7', '8', '1', ' ',
-		'7', ' ', ' ', '8', '3', '1', '5', '9', '2',
-		'9', '3', '5', ' ', '6', ' ', '4', ' ', '1',
-		' ', '2', ' ', '9', ' ', '5', ' ', '7', '3'
-   	 };
-   	 
-   	for (int i = 0; i < 81; i++) { // Dynamically allocate array
-   		grid[i] = temp[i];
-   	}
-	
-	return grid;
-}
-
 void print_grid(char* grid) {
 	for (int i = 0; i < 9; i++) {	// For every column
 		printf("-------------------");
@@ -145,10 +120,17 @@ int solve(char* grid, int occupied_spaces) {
 int main() {
 	string puzzle_data;
 	getline(cin, puzzle_data);
-	cout << puzzle_data << endl;	// TEMP
-	char* grid = initialize_grid();
+	
+	char* grid = new char[81];
+	int occupied_spaces = 0;
+	for (int i = 0; i < 81; i++) {
+		grid[i] = puzzle_data[i];
+		if (puzzle_data[i] != ' ') {
+			occupied_spaces++;
+		}
+	}
+
 	print_grid(grid);
-	int occupied_spaces = 58;
 	int steps = 0;	// Temp measure to prevent infinite loop
 	//while (occupied_spaces < 81 && steps < 80) {
 	//	occupied_spaces = solve(grid, occupied_spaces);
